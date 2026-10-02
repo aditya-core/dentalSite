@@ -1,0 +1,232 @@
+/* =========================================================================
+   MA Clínica Dental — 03 · layout & pages
+   Hero, page grids, booking wizard, responsive breakpoints.
+   ========================================================================= */
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  padding-top: calc(var(--hdr) + clamp(2.5rem, 6vw, 5.5rem));
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+  overflow: hidden;
+}
+.hero__grid { position: relative; z-index: 2; display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
+.hero h1 { margin-bottom: 1.5rem; }
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line > span { display: block; }
+.js .hero h1 .line > span { transform: translateY(105%); animation: rise 1.05s var(--ease-out) forwards; }
+.js .hero h1 .line:nth-child(2) > span { animation-delay: 0.09s; }
+.js .hero h1 .line:nth-child(3) > span { animation-delay: 0.18s; }
+@keyframes rise { to { transform: none; } }
+
+.hero__accent { font-style: italic; color: var(--mint); font-weight: 300; }
+.hero__lead { max-width: 48ch; margin-bottom: 2rem; color: var(--muted-dark); font-size: clamp(1.02rem, 0.95rem + 0.4vw, 1.2rem); }
+.hero__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero__cta .btn { flex: 1 1 210px; }
+.hero__trust {
+  display: flex; flex-wrap: wrap; gap: 0.9rem 1.8rem;
+  margin-top: 2.5rem; padding-top: 1.8rem; border-top: 1px solid var(--line-dark);
+  font-size: var(--fs-2); color: var(--muted-dark);
+}
+.hero__trust span { display: inline-flex; align-items: center; gap: 9px; }
+.hero__trust .ico { color: var(--mint); }
+
+.hero__visual { position: relative; }
+.hero__shot { aspect-ratio: 4 / 5; border-radius: var(--r-5); }
+.hero__shot::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: linear-gradient(180deg, transparent 45%, rgba(10, 21, 18, 0.55));
+}
+.fc-1 { top: 6%; left: -14px; }
+.fc-2 { bottom: 16%; right: -14px; animation-delay: -3s; }
+.fc-3 { bottom: -18px; left: 14%; animation-delay: -5s; }
+
+/* ---------- page hero (inner pages) ---------- */
+.phead {
+  position: relative; overflow: hidden;
+  padding-top: calc(var(--hdr) + clamp(3rem, 7vw, 6rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  text-align: center;
+}
+.phead .wrap { position: relative; z-index: 2; }
+.phead h1 { margin-bottom: 1rem; }
+.phead p { max-width: 58ch; margin-inline: auto; }
+.crumbs {
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  font-size: var(--fs-1); color: var(--muted-dark); margin-bottom: 1.5rem; letter-spacing: 0.06em;
+}
+.crumbs a:hover { color: var(--mint); }
+.crumbs i { font-style: normal; opacity: 0.4; }
+
+/* ---------- grids ---------- */
+.g2, .g3, .g4 { display: grid; gap: var(--g); }
+.g-hero { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
+.g-booking { display: grid; gap: var(--g); align-items: start; }
+
+/* ---------- cta band ---------- */
+.band {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-5);
+  padding: clamp(2rem, 1.2rem + 3vw, 3.6rem);
+  background: var(--ink); color: var(--cream);
+  box-shadow: var(--sh-3);
+}
+.band h2 { color: #fff; margin-bottom: 0.9rem; }
+.band p { color: var(--muted-dark); max-width: 52ch; }
+.band__row {
+  position: relative; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center; justify-content: space-between;
+}
+.band__cta { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* rotating badge */
+.spin-badge {
+  position: relative; width: 132px; height: 132px; flex: none;
+  display: grid; place-items: center;
+}
+.spin-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 22s linear infinite; }
+.spin-badge text { font-size: 8.4px; letter-spacing: 1.9px; text-transform: uppercase; fill: var(--mint); font-family: var(--sans); font-weight: 700; }
+.spin-badge .core {
+  width: 62px; height: 62px; border-radius: 50%; background: var(--mint); color: var(--ink);
+  display: grid; place-items: center;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- booking wizard ---------- */
+.wizard { padding: clamp(1.4rem, 1rem + 1.4vw, 2.2rem); }
+.step { display: none; animation: fade 0.45s var(--ease-out); }
+.step.is-active { display: block; }
+@keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.step__head { margin-bottom: 1.6rem; }
+.step__head h2 { font-family: var(--display); font-size: var(--fs-5); margin-bottom: 6px; font-weight: 400; }
+.step__head p { font-size: var(--fs-2); color: var(--muted); }
+.step__nav { display: flex; gap: 11px; margin-top: 2rem; }
+.step__nav .btn { flex: 1; }
+
+.summary { display: grid; gap: 0; }
+.summary__row {
+  display: flex; gap: 1rem; justify-content: space-between; align-items: flex-start;
+  padding: 13px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-2);
+}
+.summary__row:last-child { border-bottom: 0; }
+.summary__row dt { color: var(--muted); flex: none; }
+.summary__row dd { margin: 0; text-align: right; font-weight: 600; max-width: 62%; word-break: break-word; }
+
+.ref {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: var(--fs-4); font-weight: 600; letter-spacing: 0.08em;
+  padding: 11px 20px; border-radius: var(--r-2);
+  background: var(--mint-dim); color: var(--teal); border: 1.5px dashed rgba(14, 107, 94, 0.35);
+}
+
+.tick-wrap { width: 92px; height: 92px; margin: 0 auto 1.4rem; border-radius: 50%; background: var(--mint-dim); display: grid; place-items: center; color: var(--teal); }
+.tick-wrap svg { width: 46px; height: 46px; }
+.tick-wrap path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw 0.7s 0.15s var(--ease-out) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.side { display: grid; gap: var(--g); }
+.side .card h3 { font-size: var(--fs-3); margin-bottom: 0.9rem; }
+.numlist { counter-reset: n; display: grid; gap: 1.1rem; }
+.numlist li { position: relative; padding-left: 44px; font-size: var(--fs-2); color: var(--muted); }
+.numlist li::before {
+  counter-increment: n; content: counter(n, decimal-leading-zero);
+  position: absolute; left: 0; top: 1px;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--teal);
+  border: 1px solid var(--mint); border-radius: 9px; padding: 3px 6px;
+}
+.numlist b { display: block; color: var(--ink); font-size: var(--fs-2); }
+.ticklist { display: grid; gap: 11px; }
+.ticklist li { display: flex; gap: 10px; font-size: var(--fs-2); color: var(--muted); }
+.ticklist .ico { color: var(--teal); flex: none; margin-top: 3px; }
+
+/* ---------- misc blocks ---------- */
+.map {
+  position: relative; border-radius: var(--r-4); overflow: hidden;
+  border: 1px solid var(--line-2); aspect-ratio: 16 / 10; background: var(--cream-2);
+  box-shadow: var(--sh-1);
+}
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map__fallback {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center;
+  padding: 1.5rem; font-size: var(--fs-2); color: var(--muted);
+}
+
+.empty { text-align: center; padding: clamp(3rem, 8vw, 5rem) 1.5rem; }
+.empty .ico { color: var(--sand); }
+
+.article { font-size: var(--fs-3); line-height: 1.75; }
+.article p { margin-bottom: 1.1rem; }
+.article p:last-child { margin-bottom: 0; }
+.article strong { color: var(--ink); font-weight: 650; }
+
+.legal-prose h2 { font-family: var(--display); font-size: var(--fs-5); font-weight: 400; margin: 2.4rem 0 0.8rem; }
+.legal-prose h2:first-child { margin-top: 0; }
+
+/* ---------- reveal ---------- */
+.js .rv { opacity: 0; transform: translateY(26px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.js .rv.in { opacity: 1; transform: none; }
+.js .rv[data-d="1"] { transition-delay: 0.08s; }
+.js .rv[data-d="2"] { transition-delay: 0.16s; }
+.js .rv[data-d="3"] { transition-delay: 0.24s; }
+.js .rv[data-d="4"] { transition-delay: 0.32s; }
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (min-width: 620px) {
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(2, 1fr); }
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(4, 1fr); }
+  .pills { grid-template-columns: repeat(3, 1fr); }
+  .fab-stack { right: 22px; bottom: 22px; }
+}
+
+@media (min-width: 900px) {
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .g-hero { grid-template-columns: 1.02fr 0.98fr; }
+  .sticky-grid { grid-template-columns: 0.82fr 1.18fr; }
+  .g-booking { grid-template-columns: 1.45fr 0.95fr; }
+  .sticky-col { position: sticky; top: calc(var(--hdr) + 26px); }
+  .foot__grid { grid-template-columns: 1.7fr 1fr 1fr 1.25fr; }
+  .rail > * { flex-basis: 380px; }
+}
+
+@media (min-width: 1080px) {
+  .nav { display: block; }
+  .burger { display: none; }
+  .drawer { display: none !important; }
+  .hdr__book span { display: inline; }
+}
+
+@media (max-width: 1079px) {
+  .hdr__book { padding: 0; width: 46px; height: 46px; min-height: 46px; border-radius: 14px; }
+  .hdr__book span { display: none; }
+  .brand__sub { display: none; }
+  .lang .lbl { display: none; }
+  .lang { padding-inline: 12px; }
+}
+
+@media (max-width: 620px) {
+  .hero__cta .btn { flex: 1 1 100%; }
+  .svc { grid-template-columns: auto 1fr; }
+  .svc__meta { grid-column: 2; text-align: left; margin-top: 8px; }
+  .svc__meta b { display: inline; margin-right: 6px; }
+  .fc-1, .fc-3 { display: none; }
+  .fc-2 { right: 6px; }
+  .summary__row dd { max-width: 58%; }
+  .steps i { height: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js .rv { opacity: 1; transform: none; }
+  .js .hero h1 .line > span { transform: none; }
+}

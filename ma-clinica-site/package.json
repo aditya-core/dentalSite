@@ -1,0 +1,13 @@
+{
+  "name": "ma-clinica-dental",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for MA Clínica Dental — pure HTML, CSS and JavaScript.",
+  "scripts": {
+    "start": "python3 -m http.server 8090 --bind 0.0.0.0",
+    "test": "node tools/test-apps-script.js && node tools/test-site.js"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
